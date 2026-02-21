@@ -4,19 +4,13 @@ from jose import jwt,JWTError
 from app.core.config import SECRET_KEY,JWT_ALGORITHM,ACCESS_TOKEN_EXPIRE_MINUTES
 from datetime import datetime,timedelta
 
-pwd_cxt=CryptContext(schemes=["bcrypt"],deprecated="auto")
-
-class Hash():
-    def bcrypt(password: str):
-        return pwd_cxt.hash(password)
-
 pwd_context=CryptContext(schemes=['bcrypt'],deprecated="auto")
 
-def hash_password(password: str):
+def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
-def verify_password(password,hash):
-    return pwd_context.verify(password,hash)
+def verify_password(plain_pwd:str,hashed_pwd:str) -> bool:
+    return pwd_context.verify(plain_pwd,hashed_pwd)
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
