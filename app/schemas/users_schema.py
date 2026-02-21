@@ -21,6 +21,16 @@ class UserResponse(BaseModel):
     class Config:
         from_attributes=True
         
-class Token(BaseModel):
+# class Token(BaseModel):
+#     access_token: str
+#     token_type: str
+
+class UserOut(BaseModel):
+    id: int
+    email: str
+    role: str
+
+class LoginResponse(BaseModel):
     access_token: str
     token_type: str
+    user: UserOut
